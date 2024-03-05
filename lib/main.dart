@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 // Views
 import 'package:my_project/views/Register_view.dart';
 import 'package:my_project/views/email_verify_view.dart';
 import 'package:my_project/views/login_view.dart';
+import 'package:my_project/views/note_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +28,14 @@ void main() {
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -40,14 +47,13 @@ class HomePage extends StatelessWidget {
             final user = FirebaseAuth.instance.currentUser;
             if (user != null) {
               if (user.emailVerified) {
-                print("Email is Verified");
+                return const NotesView();
               } else {
                 return const VerifyEmailView();
               }
             } else {
               return const LoginView();
             }
-            return const Text("Done");
 
           default:
             return const Scaffold(

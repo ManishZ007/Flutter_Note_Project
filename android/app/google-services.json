@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "536923896498",
+    "project_id": "manish-notes",
+    "storage_bucket": "manish-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536923896498:android:edcb2307aced3a29ea67ab",
+        "android_client_info": {
+          "package_name": "com.note.my_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6gkWSbyFd6bmykknSo7z7CuXji_Q87J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536923896498:android:2b303acaf4fa775bea67ab",
+        "android_client_info": {
+          "package_name": "com.note.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6gkWSbyFd6bmykknSo7z7CuXji_Q87J4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

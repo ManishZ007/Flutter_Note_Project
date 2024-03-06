@@ -23,11 +23,10 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      loginRoute: (context) {
-        return const LoginView();
-      },
+      loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
       notesRoute: (context) => const NotesView(),
+      verifyEmailRoute: (context) => const VerifyEmailView(),
     },
   ));
 }

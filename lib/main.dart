@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:my_project/constants/routes.dart';
 import 'package:my_project/firebase_options.dart';
+
+//Routes
 import 'package:firebase_auth/firebase_auth.dart';
 
 // Views
@@ -20,11 +23,11 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      '/login/': (context) {
+      loginRoute: (context) {
         return const LoginView();
       },
-      '/register/': (context) => const RegisterView(),
-      '/notes/': (context) => const NotesView(),
+      registerRoute: (context) => const RegisterView(),
+      notesRoute: (context) => const NotesView(),
     },
   ));
 }

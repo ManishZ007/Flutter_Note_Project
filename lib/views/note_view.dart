@@ -43,7 +43,7 @@ class _NotesViewState extends State<NotesView> {
         ],
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: null,
+      body: const Text("This is main page"),
     );
   }
 }

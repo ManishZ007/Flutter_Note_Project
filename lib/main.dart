@@ -24,6 +24,7 @@ void main() {
         return const LoginView();
       },
       '/register/': (context) => const RegisterView(),
+      '/notes/': (context) => const NotesView(),
     },
   ));
 }

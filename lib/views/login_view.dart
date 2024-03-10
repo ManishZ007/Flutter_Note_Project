@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-//Routes
 import 'package:my_project/constants/routes.dart';
-//Dialog
 import 'package:my_project/dialogs/dialogs.dart';
+import 'package:my_project/services/auth/auth_exceptions.dart';
+import 'package:my_project/services/auth/auth_service.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -60,10 +58,12 @@ class _LoginViewState extends State<LoginView> {
               final password = _password.text;
               // exception handling
               try {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: email, password: password);
-                final user = FirebaseAuth.instance.currentUser;
-                if (user?.emailVerified ?? false) {
+                await AuthService.firebase().logIn(
+                  email: email,
+                  password: password,
+                );
+                final user = AuthService.firebase().currentUser;
+                if (user?.isEmailVerified ?? false) {
                   // ignore: use_build_context_synchronously
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     '/notes/',
@@ -75,11 +75,9 @@ class _LoginViewState extends State<LoginView> {
                     verifyEmailRoute,
                   );
                 }
-              } on FirebaseAuthException catch (e) {
-                if (e.code == "invalid-credential") {
-                  // ignore: use_build_context_synchronously
-                  showErrorDialog(context, 'user not found');
-                }
+              } on InvalidCerendialAuthException {
+                // ignore: use_build_context_synchronously
+                await showErrorDialog(context, 'user not found');
               }
             },
             child: const Text("Login"),

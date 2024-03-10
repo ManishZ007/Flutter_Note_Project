@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-//Routes
 import 'package:my_project/constants/routes.dart';
 import 'package:my_project/dialogs/dialogs.dart';
+import 'package:my_project/services/auth/auth_service.dart';
+import 'package:my_project/services/auth/auth_exceptions.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -60,31 +59,22 @@ class _RegisterViewState extends State<RegisterView> {
               final email = _email.text;
               final password = _password.text;
               try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                await AuthService.firebase().createUser(
                   email: email,
                   password: password,
                 );
-                // final user = FirebaseAuth.instance.currentUser;
-                // await user?.sendEmailVerification();
+
                 // ignore: use_build_context_synchronously
                 Navigator.of(context).pushNamed(verifyEmailRoute);
-              } on FirebaseAuthException catch (e) {
-                if (e.code == "weak-password") {
-                  // ignore: use_build_context_synchronously
-                  showErrorDialog(context, "password is to weak");
-                } else if (e.code == "email-already-in-use") {
-                  // ignore: use_build_context_synchronously
-                  showErrorDialog(context, 'email is already in user');
-                } else if (e.code == "invalid-email") {
-                  // ignore: use_build_context_synchronously
-                  showErrorDialog(context, 'please enter valid email');
-                } else {
-                  // ignore: use_build_context_synchronously
-                  showErrorDialog(
-                    context,
-                    'Error ${e.code}',
-                  );
-                }
+              } on WeakPasswordAuthException {
+                // ignore: use_build_context_synchronously
+                showErrorDialog(context, "password is to weak");
+              } on EmailAlreadyInUseAuthException {
+                // ignore: use_build_context_synchronously
+                showErrorDialog(context, 'email is already in user');
+              } on InvalidEmailAuthException {
+                // ignore: use_build_context_synchronously
+                showErrorDialog(context, 'please enter valid email');
               }
             },
             child: const Text("Register"),
